@@ -82,4 +82,26 @@ test("client plugin registers the quota widget and the OmniGate setup card", asy
   assert.ok(quota, "quota slot registered");
   assert.equal(setup.options.key, "llm-pi-ai");
   assert.equal(typeof setup.component, "function");
+
+  const { remainingRatioOf, weightedRemainingRatio, percentText, ruleLabelOf } = module.__internals;
+  assert.equal(remainingRatioOf({ limit: 100, used: 25 }), 0.75);
+  assert.equal(remainingRatioOf({ limit: 100, remaining: 25 }), 0.25);
+  assert.equal(
+    weightedRemainingRatio([
+      { limit: 100, remaining: 50 },
+      { limit: 1000, remaining: 900 },
+      { limit: 5000, remaining: 4000 },
+    ]),
+    4950 / 6100,
+  );
+  assert.equal(percentText(4950 / 6100), "81%");
+  const translator = (key) => key;
+  assert.equal(ruleLabelOf({ windowDuration: "PT5H", label: "" }, translator), "window5h");
+  assert.equal(ruleLabelOf({ windowDuration: "P7D", label: "" }, translator), "windowWeek");
+  assert.equal(ruleLabelOf({ windowDuration: "P30D", label: "" }, translator), "windowMonth");
+  assert.equal(ruleLabelOf({ windowKind: "total", label: "" }, translator), "windowTotal");
+  assert.equal(ruleLabelOf({ windowKind: "period", windowEvery: "30d", label: "" }, translator), "windowMonth");
+  assert.equal(ruleLabelOf({ windowKind: "calendar", windowUnit: "week", label: "" }, translator), "windowWeek");
+  assert.equal(ruleLabelOf({ windowKind: "lifetime", label: "" }, translator), "windowTotal");
+  assert.equal(ruleLabelOf({ windowKind: "session", windowDuration: "5h", label: "" }, translator), "window5h");
 });

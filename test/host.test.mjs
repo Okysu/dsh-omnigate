@@ -83,6 +83,8 @@ test("normalizes wallet, plan, and key limits", async () => {
             {
               id: "r1",
               label: "每月",
+              meter: "charge",
+              window: { kind: "period", every: "30d" },
               limit: "100",
               used: "25",
               resetsAt: "2026-12-01T00:00:00Z",
@@ -106,6 +108,8 @@ test("normalizes wallet, plan, and key limits", async () => {
   assert.equal(body.wallet.available, 12);
   assert.equal(body.plan.name, "Symphony 交响");
   assert.equal(body.plan.rules[0].remaining, 75);
+  assert.equal(body.plan.rules[0].windowEvery, "30d");
+  assert.equal(body.plan.rules[0].meter, "charge");
   assert.equal(body.limits.rpm, 60);
   assert.equal(body.limits.keys[0].spendLimit, 50);
 });
