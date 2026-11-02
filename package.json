@@ -1,0 +1,50 @@
+{
+  "name": "dsh-omnigate",
+  "version": "0.1.0",
+  "private": false,
+  "description": "OmniGate provider preset (Responses + Anthropic Messages) and sidebar quota widget for DeepSeek Harness",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "presets",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build:preset": "node scripts/build-preset.mjs",
+    "test": "node --test test/*.test.mjs"
+  },
+  "devDependencies": {
+    "yaml": "^2.9.1"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "omnigate",
+    "provider",
+    "openai-responses",
+    "anthropic-messages"
+  ],
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-ui-sidebar",
+        "@deepseek-ai/dsh-client-locale"
+      ]
+    }
+  }
+}
