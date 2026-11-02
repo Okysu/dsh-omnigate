@@ -177,16 +177,19 @@ Host 侧默认缓存 15 秒，避免轮询过密。
 
 运行时顺序：
 
-1. `GET https://cdn.jsdelivr.net/gh/Okysu/dsh-omnigate@main/presets/omnigate-models.json`
-2. jsDelivr 对新仓库/新分支的索引可能延迟，失败时立即回退到 `https://raw.githubusercontent.com/Okysu/dsh-omnigate/main/presets/omnigate-models.json`
+1. 同时请求 `https://cdn.jsdelivr.net/gh/Okysu/dsh-omnigate@main/presets/omnigate-models.json` 与 `https://raw.githubusercontent.com/Okysu/dsh-omnigate/main/presets/omnigate-models.json`
+2. 取 `revision` 较大的那一份；两者相同则优先用 jsDelivr。这样 jsDelivr 还没索引到最新提交时，不会用旧缓存覆盖新配置
 3. 两者都失败、超时或校验不通过时，使用插件内置的 `presets/omnigate-models.json`
 4. 对已安装的 `omnigate` / `omnigate-claude` 路由做合并同步：用户改过的字段与模型保留，只更新仍等于内置预设的部分
 
-`GET /omnigate/preset` 会返回当前生效的预设、`providers`、`source`（`cdn` / `github` / `bundled`）以及实际命中的 `url`，方便排查。
+`GET /omnigate/preset` 会返回当前生效的预设、`providers`、`revision`、`source`（`cdn` / `github` / `bundled`）以及实际命中的 `url`，方便排查。
+
+> 修改预设内容时请递增 JSON 顶层的 `revision`，否则运行时可能把旧缓存当成同样新的版本。
 
 | 字段 | 说明 |
 |---|---|
 | `version` | 目前固定为 `1` |
+| `revision` | 预设内容版本号；修改模型/等级/容量时递增，运行时取 CDN 与 raw GitHub 中较大者 |
 | `apiKeyEnv` | 凭据引用名；默认 `OMNIGATE_API_KEY` |
 | `routes` | provider id → `displayName` / `api` / `baseURL` |
 | `models[].id` | 网关模型名，必须完全一致 |
