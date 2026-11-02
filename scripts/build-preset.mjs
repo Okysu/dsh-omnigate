@@ -75,6 +75,7 @@ patch.push("      config:");
 patch.push('        baseURL: "https://gate.oky.su/v1"');
 patch.push(`        apiKeyEnv: ${quote(parsed.apiKeyEnv)}`);
 patch.push('        presetURL: "https://cdn.jsdelivr.net/gh/Okysu/dsh-omnigate@main/presets/omnigate-models.json"');
+patch.push('        presetFallbackURL: "https://raw.githubusercontent.com/Okysu/dsh-omnigate/main/presets/omnigate-models.json"');
 patch.push("        cacheSeconds: 15");
 patch.push("        timeoutMs: 20000");
 patch.push("        syncPreset: true");

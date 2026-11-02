@@ -181,6 +181,7 @@
         baseURL: "https://gate.oky.su/v1"
         apiKeyEnv: "OMNIGATE_API_KEY"
         presetURL: "https://cdn.jsdelivr.net/gh/Okysu/dsh-omnigate@main/presets/omnigate-models.json"
+        presetFallbackURL: "https://raw.githubusercontent.com/Okysu/dsh-omnigate/main/presets/omnigate-models.json"
         cacheSeconds: 15
         timeoutMs: 20000
         syncPreset: true

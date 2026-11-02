@@ -165,10 +165,11 @@ Host 侧默认缓存 15 秒，避免轮询过密。
 运行时顺序：
 
 1. `GET https://cdn.jsdelivr.net/gh/Okysu/dsh-omnigate@main/presets/omnigate-models.json`
-2. 失败、超时或校验不通过时，使用插件内置的 `presets/omnigate-models.json`
-3. 对已安装的 `omnigate` / `omnigate-claude` 路由做合并同步：用户改过的字段与模型保留，只更新仍等于内置预设的部分
+2. jsDelivr 对新仓库/新分支的索引可能延迟，失败时立即回退到 `https://raw.githubusercontent.com/Okysu/dsh-omnigate/main/presets/omnigate-models.json`
+3. 两者都失败、超时或校验不通过时，使用插件内置的 `presets/omnigate-models.json`
+4. 对已安装的 `omnigate` / `omnigate-claude` 路由做合并同步：用户改过的字段与模型保留，只更新仍等于内置预设的部分
 
-`GET /omnigate/preset` 会返回当前生效的预设、`providers` 以及 `source`（`cdn` / `bundled`），方便排查 CDN 是否命中。
+`GET /omnigate/preset` 会返回当前生效的预设、`providers`、`source`（`cdn` / `github` / `bundled`）以及实际命中的 `url`，方便排查。
 
 | 字段 | 说明 |
 |---|---|
@@ -194,6 +195,7 @@ Host 侧默认缓存 15 秒，避免轮询过密。
     baseURL: https://gate.oky.su/v1
     apiKeyEnv: OMNIGATE_API_KEY
     presetURL: https://cdn.jsdelivr.net/gh/Okysu/dsh-omnigate@main/presets/omnigate-models.json
+    presetFallbackURL: https://raw.githubusercontent.com/Okysu/dsh-omnigate/main/presets/omnigate-models.json
     presetTimeoutMs: 8000
     syncPreset: true
     cacheSeconds: 15
@@ -205,8 +207,9 @@ Host 侧默认缓存 15 秒，避免轮询过密。
 | `baseURL` | `https://gate.oky.su/v1` | 账户接口基址，会拼接 `/account` |
 | `apiKeyEnv` | `OMNIGATE_API_KEY` | 凭据引用 |
 | `apiKey` | 空 | 不推荐；直接写在配置里的兜底 key |
-| `presetURL` | jsDelivr 地址 | 预设 CDN；设为空字符串则只用内置 JSON |
-| `presetTimeoutMs` | `8000` | 单次 CDN 请求超时 |
+| `presetURL` | jsDelivr 地址 | 预设 CDN；设为空字符串则跳过 |
+| `presetFallbackURL` | raw GitHub 地址 | jsDelivr 未索引或不可用时的回退；设为空字符串则跳过 |
+| `presetTimeoutMs` | `8000` | 单次预设请求超时 |
 | `syncPreset` | `true` | 是否把 CDN 预设合并到已安装路由 |
 | `cacheSeconds` | `15` | 额度缓存秒数 |
 | `timeoutMs` | `20000` | 额度请求超时 |
