@@ -41,6 +41,12 @@ function emitModel(model, indent) {
   for (const [level, wire] of Object.entries(model.reasoningEfforts)) {
     lines.push(`${pad}    ${level}: ${wire === null ? "null" : quote(wire)}`);
   }
+  if (model.compat !== undefined && Object.keys(model.compat).length > 0) {
+    lines.push(`${pad}  compat:`);
+    for (const [key, value] of Object.entries(model.compat)) {
+      lines.push(`${pad}    ${key}: ${typeof value === "string" ? quote(value) : String(value)}`);
+    }
+  }
   return lines.join("\n");
 }
 

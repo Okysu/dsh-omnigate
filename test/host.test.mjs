@@ -91,6 +91,21 @@ test("normalizes wallet, plan, and key limits", async () => {
             },
           ],
         },
+        {
+          plan: { id: "p2", name: "微量应急包" },
+          status: "active",
+          rules: [
+            {
+              id: "total",
+              label: "总额度",
+              meter: "charge",
+              window: { kind: "lifetime" },
+              limit: "19",
+              used: "0",
+              resetsAt: null,
+            },
+          ],
+        },
       ],
       limits: {
         group: { name: "default", rpm: 60, rpd: 1000, dailySpend: "5", monthlySpend: "100" },
@@ -110,6 +125,10 @@ test("normalizes wallet, plan, and key limits", async () => {
   assert.equal(body.plan.rules[0].remaining, 75);
   assert.equal(body.plan.rules[0].windowEvery, "30d");
   assert.equal(body.plan.rules[0].meter, "charge");
+  assert.equal(body.plans.length, 2);
+  assert.equal(body.plans[0].name, "Symphony 交响");
+  assert.equal(body.plans[1].name, "微量应急包");
+  assert.equal(body.plans[1].rules[0].remaining, 19);
   assert.equal(body.limits.rpm, 60);
   assert.equal(body.limits.keys[0].spendLimit, 50);
 });

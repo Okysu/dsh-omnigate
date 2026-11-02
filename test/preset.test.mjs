@@ -60,6 +60,31 @@ test("every model declares input and at least one thinking level", () => {
   }
 });
 
+test("uses provider-documented capacities and effort sets", () => {
+  const all = Object.values(providers).flatMap((route) => route.models);
+  for (const model of all.filter((entry) => entry.id.startsWith("gpt-"))) {
+    assert.equal(model.contextWindow, 1050000, `${model.id} context`);
+    assert.equal(model.maxTokens, 128000, `${model.id} output`);
+  }
+
+  const claude = providers["omnigate-claude"].models;
+  for (const model of claude) {
+    assert.equal(model.contextWindow, 1000000);
+    assert.equal(model.maxTokens, 128000);
+    assert.equal(model.compat?.forceAdaptiveThinking, true);
+    assert.equal(Object.hasOwn(model.reasoningEfforts, "off"), false);
+    assert.equal(model.reasoningEfforts.xhigh, "xhigh");
+    assert.equal(model.reasoningEfforts.max, "max");
+  }
+
+  const byId = new Map(all.map((model) => [model.id, model]));
+  assert.equal(byId.get("gpt-6-sol").reasoningEfforts.off, "none");
+  assert.equal(byId.get("gpt-6.1-sol").reasoningEfforts.off, undefined);
+  assert.equal(byId.get("gpt-6.1-sol").reasoningEfforts.xhigh, "xhigh");
+  assert.equal(byId.get("glm-5.2:free").reasoningEfforts.xhigh, "xhigh");
+  assert.equal(byId.get("deepseek-v4-pro").maxTokens, 384000);
+});
+
 test("merge keeps user edits and adds new upstream models", () => {
   const baseline = structuredClone(providers);
   const incoming = structuredClone(providers);

@@ -21,13 +21,19 @@
       "route": "omnigate-claude",
       "contextWindow": 1000000,
       "maxTokens": 128000,
-      "input": ["text", "image"],
+      "input": [
+        "text",
+        "image"
+      ],
       "reasoningEfforts": {
-        "off": null,
         "low": "low",
         "medium": "medium",
         "high": "high",
+        "xhigh": "xhigh",
         "max": "max"
+      },
+      "compat": {
+        "forceAdaptiveThinking": true
       },
       "description": "Anthropic 旗舰模型，适合复杂推理、编程与长程智能体任务。"
     },
@@ -38,13 +44,19 @@
       "route": "omnigate-claude",
       "contextWindow": 1000000,
       "maxTokens": 128000,
-      "input": ["text", "image"],
+      "input": [
+        "text",
+        "image"
+      ],
       "reasoningEfforts": {
-        "off": null,
         "low": "low",
         "medium": "medium",
         "high": "high",
+        "xhigh": "xhigh",
         "max": "max"
+      },
+      "compat": {
+        "forceAdaptiveThinking": true
       },
       "description": "Anthropic 均衡型号，在能力、速度与成本之间取得平衡。"
     },
@@ -55,7 +67,10 @@
       "route": "omnigate",
       "contextWindow": 1000000,
       "maxTokens": 384000,
-      "input": ["text", "image"],
+      "input": [
+        "text",
+        "image"
+      ],
       "reasoningEfforts": {
         "low": "low",
         "high": "high",
@@ -70,7 +85,10 @@
       "route": "omnigate",
       "contextWindow": 1000000,
       "maxTokens": 384000,
-      "input": ["text", "image"],
+      "input": [
+        "text",
+        "image"
+      ],
       "reasoningEfforts": {
         "low": "low",
         "high": "high",
@@ -85,7 +103,9 @@
       "route": "omnigate",
       "contextWindow": 1000000,
       "maxTokens": 384000,
-      "input": ["text"],
+      "input": [
+        "text"
+      ],
       "reasoningEfforts": {
         "low": "low",
         "high": "high",
@@ -100,7 +120,10 @@
       "route": "omnigate",
       "contextWindow": 1000000,
       "maxTokens": 384000,
-      "input": ["text", "image"],
+      "input": [
+        "text",
+        "image"
+      ],
       "reasoningEfforts": {
         "low": "low",
         "high": "high",
@@ -115,12 +138,16 @@
       "route": "omnigate",
       "contextWindow": 1000000,
       "maxTokens": 128000,
-      "input": ["text"],
+      "input": [
+        "text"
+      ],
       "reasoningEfforts": {
         "off": "none",
+        "minimal": "minimal",
         "low": "low",
         "medium": "medium",
         "high": "high",
+        "xhigh": "xhigh",
         "max": "max"
       },
       "description": "智谱 GLM-5.2 免费体验版，全站共享限额。"
@@ -132,7 +159,10 @@
       "route": "omnigate",
       "contextWindow": 1000000,
       "maxTokens": 128000,
-      "input": ["text", "image"],
+      "input": [
+        "text",
+        "image"
+      ],
       "reasoningEfforts": {
         "low": "low",
         "high": "high",
@@ -147,7 +177,10 @@
       "route": "omnigate",
       "contextWindow": 1000000,
       "maxTokens": 128000,
-      "input": ["text", "image"],
+      "input": [
+        "text",
+        "image"
+      ],
       "reasoningEfforts": {
         "low": "low",
         "high": "high",
@@ -160,15 +193,19 @@
       "name": "GPT-5.6 Sol",
       "vendor": "OpenAI",
       "route": "omnigate",
-      "contextWindow": 1000000,
+      "contextWindow": 1050000,
       "maxTokens": 128000,
-      "input": ["text", "image"],
+      "input": [
+        "text",
+        "image"
+      ],
       "reasoningEfforts": {
         "off": "none",
-        "minimal": "minimal",
         "low": "low",
         "medium": "medium",
-        "high": "high"
+        "high": "high",
+        "xhigh": "xhigh",
+        "max": "max"
       },
       "description": "GPT-5.6 旗舰模型，面向复杂推理、编程与科学研究。"
     },
@@ -177,15 +214,19 @@
       "name": "GPT-5.6 Terra",
       "vendor": "OpenAI",
       "route": "omnigate",
-      "contextWindow": 1000000,
+      "contextWindow": 1050000,
       "maxTokens": 128000,
-      "input": ["text", "image"],
+      "input": [
+        "text",
+        "image"
+      ],
       "reasoningEfforts": {
         "off": "none",
-        "minimal": "minimal",
         "low": "low",
         "medium": "medium",
-        "high": "high"
+        "high": "high",
+        "xhigh": "xhigh",
+        "max": "max"
       },
       "description": "GPT-5.6 均衡型模型，适合日常通用任务。"
     },
@@ -194,15 +235,18 @@
       "name": "GPT-6 Astra",
       "vendor": "OpenAI",
       "route": "omnigate",
-      "contextWindow": 1000000,
+      "contextWindow": 1050000,
       "maxTokens": 128000,
-      "input": ["text", "image"],
+      "input": [
+        "text",
+        "image"
+      ],
       "reasoningEfforts": {
-        "off": "none",
-        "minimal": "minimal",
         "low": "low",
         "medium": "medium",
-        "high": "high"
+        "high": "high",
+        "xhigh": "xhigh",
+        "max": "max"
       },
       "description": "GPT-6 旗舰型号，适合高难度推理、编程与专业工作任务。"
     },
@@ -211,15 +255,19 @@
       "name": "GPT-6 Sol",
       "vendor": "OpenAI",
       "route": "omnigate",
-      "contextWindow": 1000000,
+      "contextWindow": 1050000,
       "maxTokens": 128000,
-      "input": ["text", "image"],
+      "input": [
+        "text",
+        "image"
+      ],
       "reasoningEfforts": {
         "off": "none",
-        "minimal": "minimal",
         "low": "low",
         "medium": "medium",
-        "high": "high"
+        "high": "high",
+        "xhigh": "xhigh",
+        "max": "max"
       },
       "description": "GPT-6 高性能型号，面向复杂编程与智能体工作流。"
     },
@@ -228,15 +276,18 @@
       "name": "GPT-6.1 Sol",
       "vendor": "OpenAI",
       "route": "omnigate",
-      "contextWindow": 1000000,
+      "contextWindow": 1050000,
       "maxTokens": 128000,
-      "input": ["text", "image"],
+      "input": [
+        "text",
+        "image"
+      ],
       "reasoningEfforts": {
-        "off": "none",
-        "minimal": "minimal",
         "low": "low",
         "medium": "medium",
-        "high": "high"
+        "high": "high",
+        "xhigh": "xhigh",
+        "max": "max"
       },
       "description": "GPT-6.1 Sol，面向编程与复杂任务。"
     },
@@ -245,15 +296,19 @@
       "name": "GPT-6.1 Terra",
       "vendor": "OpenAI",
       "route": "omnigate",
-      "contextWindow": 1000000,
+      "contextWindow": 1050000,
       "maxTokens": 128000,
-      "input": ["text", "image"],
+      "input": [
+        "text",
+        "image"
+      ],
       "reasoningEfforts": {
         "off": "none",
-        "minimal": "minimal",
         "low": "low",
         "medium": "medium",
-        "high": "high"
+        "high": "high",
+        "xhigh": "xhigh",
+        "max": "max"
       },
       "description": "GPT-6.1 均衡型模型，适合日常通用任务。"
     }

@@ -88,17 +88,28 @@ Base URL 已预置。需要改网关地址时，展开 **自定义设置** 修�
 
 | 模型 | 预设推理等级 |
 |---|---|
-| Claude Opus 5.5 / Sonnet 5.5 | off, low, medium, high, max |
+| Claude Opus 5.5 / Sonnet 5.5 | low, medium, high, xhigh, max（adaptive thinking） |
 | DeepSeek Flash / V4.1 Flash / V4 Pro | low, high, max |
-| GLM-5.2（免费） | off, low, medium, high, max |
+| GLM-5.2（免费） | off, minimal, low, medium, high, xhigh, max |
 | GLM-5.3-Flash / FlashX | low, high, max |
-| GPT-5.6 / GPT-6 / GPT-6.1 | off, minimal, low, medium, high |
+| GPT-5.6 Sol / Terra、GPT-6 Sol、GPT-6.1 Terra | off, low, medium, high, xhigh, max |
+| GPT-6 Astra、GPT-6.1 Sol | low, medium, high, xhigh, max |
+
+容量预设：
+
+| 模型 | 上下文 | 最大输出 |
+|---|---|---|
+| Claude Opus 5.5 / Sonnet 5.5 | 1,000,000 | 128,000 |
+| GPT-5.6 / GPT-6 / GPT-6.1 | 1,050,000 | 128,000 |
+| GLM-5.2 / GLM-5.3 | 1,000,000 | 128,000 |
+| DeepSeek Flash / V4 Pro / V4.1 Flash | 1,000,000 | 384,000 |
 
 说明：
 
-- `off` 表示不发送推理参数（Anthropic 即关闭思考；OpenAI 发送 `none`）。
+- Claude 5.5 使用 **adaptive thinking**（`thinking.type=adaptive` + `output_config.effort`），预设里带 `compat.forceAdaptiveThinking: true`；Opus 5.5 的思考不能关闭，所以没有 `off` 档。
+- GPT-6 Astra / GPT-6.1 Sol 官方不支持 `none`，所以没有 `off` 档；其余 GPT 模型的 `off` 发送 `none`。
 - DeepSeek 与 GLM-5.3 默认就开启思考，官方不接受 `off`，所以预设里没有这一档。
-- 各等级的 wire 值就是官方名称（`none` / `minimal` / `low` / `medium` / `high` / `max`）。实际可用值以网关当前渠道为准；如果某个渠道拒绝，DSH 会把错误原样显示在对话里。
+- 各等级的 wire 值就是官方名称（`none` / `minimal` / `low` / `medium` / `high` / `xhigh` / `max`）。实际可用值以网关当前渠道为准；如果某个渠道拒绝，DSH 会把错误原样显示在对话里。
 
 ### 3. 自定义模型
 
@@ -122,9 +133,9 @@ npm run build:preset
 侧边栏底部会多一个 **OmniGate** 额度入口：
 
 - 圆环显示**加权剩余额度百分比**（按每条规则的上限加权）；展开后同时显示百分比和具体数值。
+- **同时生效的多个套餐会分别列出**，每个套餐有自己的百分比、规则和到期时间；圆环和侧边栏数值按全部生效套餐汇总。
 - 套餐的 **5 小时 / 每周 / 每月 / 总额度** 等每条规则都会逐条显示：剩余百分比、进度条、`剩余 X / Y` 和重置时间。
 - 钱包余额（`balance`）与可用余额（`available`）
-- 套餐名称、状态、已用百分比
 - Key 限额：RPM / RPD、每日消费、每月消费、Key 消费上限、过期时间
 
 点击展开详情，60 秒自动刷新，也可手动刷新。数据由 Host 进程请求：
