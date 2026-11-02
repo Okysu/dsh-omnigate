@@ -1,6 +1,6 @@
 {
   "name": "dsh-omnigate",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
   "description": "OmniGate provider preset (Responses + Anthropic Messages) and sidebar quota widget for DeepSeek Harness",
   "type": "module",
