@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "revision": 2,
+  "revision": 3,
   "apiKeyEnv": "OMNIGATE_API_KEY",
   "routes": {
     "omnigate": {
@@ -131,6 +131,42 @@
         "max": "max"
       },
       "description": "1M 上下文、384K 输出，支持图像理解与工具调用，分时段计费。"
+    },
+    {
+      "id": "gemini-4-argon",
+      "name": "Gemini 4 Argon",
+      "vendor": "Google",
+      "route": "omnigate",
+      "contextWindow": 1048576,
+      "maxTokens": 65536,
+      "input": [
+        "text",
+        "image"
+      ],
+      "reasoningEfforts": {
+        "low": "low",
+        "medium": "medium",
+        "high": "high"
+      },
+      "description": "Google 旗舰模型，长程软件工程、自主智能体与复杂企业流程。思考默认开启（medium），无法关闭。"
+    },
+    {
+      "id": "gemini-3.8-flash",
+      "name": "Gemini 3.8 Flash",
+      "vendor": "Google",
+      "route": "omnigate",
+      "contextWindow": 1048576,
+      "maxTokens": 65536,
+      "input": [
+        "text",
+        "image"
+      ],
+      "reasoningEfforts": {
+        "low": "low",
+        "medium": "medium",
+        "high": "high"
+      },
+      "description": "Google 高速多模态模型，原生视觉与工具调用，适合大规模 Agent 与编程场景。思考默认开启（medium），无法关闭。"
     },
     {
       "id": "glm-5.2:free",

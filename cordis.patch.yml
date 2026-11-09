@@ -49,6 +49,24 @@
               low: "low"
               high: "high"
               max: "max"
+          - id: "gemini-4-argon"
+            name: "Gemini 4 Argon"
+            contextWindow: 1048576
+            maxTokens: 65536
+            input: ["text", "image"]
+            reasoningEfforts:
+              low: "low"
+              medium: "medium"
+              high: "high"
+          - id: "gemini-3.8-flash"
+            name: "Gemini 3.8 Flash"
+            contextWindow: 1048576
+            maxTokens: 65536
+            input: ["text", "image"]
+            reasoningEfforts:
+              low: "low"
+              medium: "medium"
+              high: "high"
           - id: "glm-5.2:free"
             name: "GLM-5.2（免费）"
             contextWindow: 1000000
