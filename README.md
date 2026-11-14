@@ -90,6 +90,8 @@ Base URL 已预置。需要改网关地址时，展开 **自定义设置** 修�
 |---|---|
 | Claude Opus 5.5 / Sonnet 5.5 | low, medium, high, xhigh, max（adaptive thinking） |
 | DeepSeek Flash / V4.1 Flash / V4 Pro | low, high, max |
+| Gemini 4 Hydrogen | low, medium, high, xhigh |
+| Gemini 4 Argon、Gemini 3.8 Flash | low, medium, high |
 | GLM-5.2（免费） | off, minimal, low, medium, high, xhigh, max |
 | GLM-5.3-Flash / FlashX | low, high, max |
 | GPT-5.6 Sol / Terra、GPT-6 Sol、GPT-6.1 Terra | off, low, medium, high, xhigh, max |
@@ -101,12 +103,14 @@ Base URL 已预置。需要改网关地址时，展开 **自定义设置** 修�
 |---|---|---|
 | Claude Opus 5.5 / Sonnet 5.5 | 1,000,000 | 128,000 |
 | GPT-5.6 / GPT-6 / GPT-6.1 | 1,050,000 | 128,000 |
+| Gemini 4 Hydrogen / Argon、Gemini 3.8 Flash | 1,048,576 | 65,536 |
 | GLM-5.2 / GLM-5.3 | 1,000,000 | 128,000 |
 | DeepSeek Flash / V4 Pro / V4.1 Flash | 1,000,000 | 384,000 |
 
 说明：
 
 - Claude 5.5 使用 **adaptive thinking**（`thinking.type=adaptive` + `output_config.effort`），预设里带 `compat.forceAdaptiveThinking: true`；Opus 5.5 的思考不能关闭，所以没有 `off` 档。
+- Gemini 4 系列思考默认开启且不能关闭（Argon/3.8 Flash 默认 `medium`，Hydrogen 默认 `high`），因此没有 `off` / `minimal` 档；`xhigh` 目前只有 Hydrogen 支持。Gemini 4 同步请求的输出上限是 65,536，超过需要 `background=True`（DSH 不使用），所以预设按同步上限填写。
 - GPT-6 Astra / GPT-6.1 Sol 官方不支持 `none`，所以没有 `off` 档；其余 GPT 模型的 `off` 发送 `none`。
 - DeepSeek 与 GLM-5.3 默认就开启思考，官方不接受 `off`，所以预设里没有这一档。
 - 各等级的 wire 值就是官方名称（`none` / `minimal` / `low` / `medium` / `high` / `xhigh` / `max`）。实际可用值以网关当前渠道为准；如果某个渠道拒绝，DSH 会把错误原样显示在对话里。

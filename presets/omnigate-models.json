@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "revision": 3,
+  "revision": 4,
   "apiKeyEnv": "OMNIGATE_API_KEY",
   "routes": {
     "omnigate": {
@@ -167,6 +167,25 @@
         "high": "high"
       },
       "description": "Google 高速多模态模型，原生视觉与工具调用，适合大规模 Agent 与编程场景。思考默认开启（medium），无法关闭。"
+    },
+    {
+      "id": "gemini-4-hydrogen",
+      "name": "Gemini 4 Hydrogen",
+      "vendor": "Google",
+      "route": "omnigate",
+      "contextWindow": 1048576,
+      "maxTokens": 65536,
+      "input": [
+        "text",
+        "image"
+      ],
+      "reasoningEfforts": {
+        "low": "low",
+        "medium": "medium",
+        "high": "high",
+        "xhigh": "xhigh"
+      },
+      "description": "Google 旗舰推理模型，统一 1M 上下文、长解码，支持图像与音频输入。思考默认 high 且不可关闭，新增 xhigh 档。"
     },
     {
       "id": "glm-5.2:free",
